@@ -1,11 +1,15 @@
-export async function createRoot(): Promise<HTMLDivElement> {
-	return new Promise((fulfil, reject) => {
-		const root = document.querySelector<HTMLDivElement>('#root');
+export async function createRoot(refrence: HTMLElement | string): Promise<HTMLElement> {
+	let htmlElement: HTMLElement | null = null;
+	let htmlFetched: HTMLElement | null = null;
 
-		if (root?.tagName.toLowerCase() === 'div') {
-			fulfil(root);
-		} else {
-			reject('HTML Root not found!');
-		}
-	});
+	if (typeof refrence === 'string') {
+		htmlFetched = document.querySelector(refrence);
+		htmlElement = htmlFetched;
+	} else {
+		htmlElement = refrence;
+	}
+
+	if (htmlElement?.isConnected) return Promise.resolve(htmlElement);
+
+	throw 'Invalid refrence!';
 }

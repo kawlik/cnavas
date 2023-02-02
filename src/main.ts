@@ -1,20 +1,8 @@
-import { adjustCanvasTransform, adjustCanvasDimension } from './core/canvas';
-import { createRoot } from './core/root';
+import { Canvas, Root } from './core/@';
 
-// Initialize project
-createRoot()
-	.then((root) => {
-		// Create canvas
-		const cvs = document.createElement('canvas');
-		const ctx = cvs.getContext('2d');
+Root.createRoot(document.body).then(async (root) => {
+	let canvas: HTMLCanvasElement;
 
-		// Configure canvas
-		adjustCanvasDimension(cvs);
-		adjustCanvasTransform(cvs);
-
-		// Update DOM
-		root.append(cvs);
-	})
-	.catch((err) => {
-		alert(err);
-	});
+	canvas = await Canvas.createCanvas(root);
+	canvas = await Canvas.adjustCanvas(canvas, { canvasX: 900, canvasY: 1600 });
+});
