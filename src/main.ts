@@ -1,4 +1,5 @@
-const cvs = document.body.appendChild(document.createElement('canvas'));
+import { Game } from './game';
 
-cvs.width = 900;
-cvs.height = 1600;
+const game = new Game(document.body);
+
+game.animate();
