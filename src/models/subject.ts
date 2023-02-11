@@ -3,6 +3,13 @@ import { Shape } from './shape';
 export type tEdge = 'bottom' | 'left' | 'right' | 'top';
 
 export abstract class Subject {
+	public static collides(s1: Subject, s2: Subject): boolean {
+		const dx = s1.shape.x - s2.shape.x;
+		const dy = s1.shape.y - s2.shape.y;
+
+		return Math.sqrt(dx ** 2 + dy ** 2) < s1.shape.r + s2.shape.r;
+	}
+
 	constructor(protected shape: Shape) {}
 
 	public borders(edge: tEdge, bbx: number, bby: number): boolean {
@@ -23,11 +30,11 @@ export abstract class Subject {
 			case 'top':
 				return this.shape.y + this.shape.r < 0;
 			case 'left':
-				return this.shape.x + this.shape.x < 0;
+				return this.shape.x + this.shape.r < 0;
 			case 'right':
-				return this.shape.x - this.shape.x > bbx;
+				return this.shape.x - this.shape.r > bbx;
 			case 'bottom':
-				return this.shape.y - this.shape.y > bby;
+				return this.shape.y - this.shape.r > bby;
 		}
 	}
 

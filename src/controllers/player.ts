@@ -1,4 +1,4 @@
-import { Stain } from '../assets/subjects/stain';
+import { Softy } from '../assets/subjects/softy';
 import { Subject, tEdge } from '../models/subject';
 
 export class PlayerController {
@@ -17,9 +17,13 @@ export class PlayerController {
 		private r: number
 	) {
 		this.attract = PlayerController.getRandomAlign();
-		this.subject = new Stain(this.x, this.y, this.r);
+		this.subject = new Softy(this.x, this.y, this.r);
 
 		this.alignEdge(this.attract);
+	}
+
+	public colides(subject: Subject): boolean {
+		return Subject.collides(this.subject, subject);
 	}
 
 	public toggle(): void {

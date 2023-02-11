@@ -1,10 +1,14 @@
 import { Subject } from '../../models/subject';
-import { Circle } from '../shapes/circle';
+import { Rhombus } from '../shapes/rhombus';
 
 export class Spike extends Subject {
+	public static getRandomStart(bbx: number): number {
+		return Math.random() > 0.5 ? 0 : bbx;
+	}
+
 	constructor(x: number, y: number, r: number) {
 		super(
-			new Circle(x, y, r, {
+			new Rhombus(x, y, r, {
 				h: 100,
 				s: 100,
 				l: 50,
